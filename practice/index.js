@@ -2,18 +2,23 @@ const { equal } = require('assert');
 const http = require('http');
 const port = 8001;
 const url = require('url')
+const users = (require('./users')).users;
 
-const users = [
-    { id: 0, name: 'Michael', capsuleNumber: 1 },
-    { id: 1, name: 'Gilad', capsuleNumber: 1 },
-    { id: 2, name: 'Taly', capsuleNumber: 1 },
-    { id: 3, name: 'Shir', capsuleNumber: 1 },
-    { id: 4, name: 'Osama', capsuleNumber: 1 },
-    { id: 5, name: 'Guy', capsuleNumber: 1 },
-    { id: 6, name: 'Shlomi', capsuleNumber: 2 },
-    { id: 7, name: 'Or', capsuleNumber: 2 },
-    { id: 8, name: 'Rachel', capsuleNumber: 2 },
-]
+
+
+// const users = [
+//     { id: 0, name: 'Michael', capsuleNumber: 1 },
+//     { id: 1, name: 'Gilad', capsuleNumber: 1 },
+//     { id: 2, name: 'Taly', capsuleNumber: 1 },
+//     { id: 3, name: 'Shir', capsuleNumber: 1 },
+//     { id: 4, name: 'Osama', capsuleNumber: 1 },
+//     { id: 5, name: 'Guy', capsuleNumber: 1 },
+//     { id: 6, name: 'Shlomi', capsuleNumber: 2 },
+//     { id: 7, name: 'Or', capsuleNumber: 2 },
+//     { id: 8, name: 'Rachel', capsuleNumber: 2 },
+// ]
+
+// console.log(users1);
 
 const server = http.createServer((req, res) => {
     const query = url.parse(req.url, true).query;
