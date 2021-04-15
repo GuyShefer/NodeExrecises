@@ -1,0 +1,33 @@
+{
+    "rooms": [
+        {
+            "roomNumber": 2,
+            "maxWorkers": 4,
+            "isActive": false,
+            "workers": [
+                {
+                    "id": 1,
+                    "name": "yossi",
+                    "isActive": false
+                },
+                {
+                    "id": 1,
+                    "name": "yossi",
+                    "isActive": false
+                }
+            ]
+        },
+        {
+            "roomNumber": 1,
+            "maxWorkers": 5,
+            "isActive": true,
+            "workers": [
+                {
+                    "id": 3,
+                    "name": "asaf 123",
+                    "isActive": false
+                }
+            ]
+        }
+    ]
+}

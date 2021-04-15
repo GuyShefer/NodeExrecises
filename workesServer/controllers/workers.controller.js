@@ -11,7 +11,7 @@ const getWorkerById = (req, res, id) => {
         res.status(204).send('User Not Found.');
     } else {
         const worker = workers.filter(worker => worker.id == id);
-        return res.status(200).json(worker);
+        return worker;
     }
 }
 
@@ -42,13 +42,13 @@ const createWorker = (req, res) => {
 
         const tempWorkersJSON = workersData;
         tempWorkersJSON.workers.push(worker);
-        console.log(tempWorkersJSON);
 
         fs.writeFileSync('./data/workers.json', JSON.stringify(tempWorkersJSON));
-        res.status(200).send("Worker has been added.");
+        res.status(200).send("Worker has been added successfully.");
     }
 
 }
+
 
 module.exports = {
     getAllWorkers,
