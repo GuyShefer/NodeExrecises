@@ -1,0 +1,34 @@
+{
+    "workers": [
+        {
+            "id": 0,
+            "name": "Guy",
+            "isActive": false
+        },
+        {
+            "id": 1,
+            "name": "yossi",
+            "isActive": false
+        },
+        {
+            "id": 2,
+            "name": "asaf 123",
+            "isActive": false
+        },
+        {
+            "id": 3,
+            "name": "asaf 123",
+            "isActive": false
+        },
+        {
+            "id": 5,
+            "name": "asdasd asdasd",
+            "isActive": false
+        },
+        {
+            "id": 7,
+            "name": "yuval shefer",
+            "isActive": false
+        }
+    ]
+}
