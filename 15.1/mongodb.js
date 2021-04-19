@@ -17,20 +17,6 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
 
     const db = client.db(databaseName);
 
-    // db.collection('restaurants').insertOne({
-    //     name: 'Guy',
-    //     ageL: 28
-    // },(err,res) => {
-    //     if(err) {
-    //         console.log('Unable to insert user.');
-    //     }
-    //     console.log(res.ops);
-    // })
-
-    // db.collection('restaurants').findOne({ _id: new ObjectID('607d7e37cf220933dc31b91b') }, (err, res) => {
-    //     console.log(res);
-    // })
-    // ---------------------
 
     // 1.1
     db.collection('restaurants').find({}).toArray((err, res) => {
@@ -74,5 +60,74 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
         console.log(res);
     })
 
+    // 1.6
+    db.collection('restaurants').find({
+        "address.coordinates": [20.46574, -40.6774]}).toArray((err, res) => {
+        if (err) {
+            return console.log('Unable to fetch data');
+        }
+        console.log(res);
+    })
+
+    // 1.7
+     db.collection('restaurants').find({}).sort({"name": 1}).toArray((err, res) => {
+        if (err) {
+            return console.log('Unable to fetch data');
+        }
+        console.log(res);
+    })
+
+    // 1.8
+     db.collection('restaurants').find({}).sort({"address.city": 1}).toArray((err, res) => {
+        if (err) {
+            return console.log('Unable to fetch data');
+        }
+        console.log(res);
+    })
+
+    // 1.9
+    db.collection('restaurants').updateOne({"name": 'bombay'}, {$set : {"name": "shipudei ezra + banav"}});
+
+    // 1.10
+    db.collection('restaurants').updateOne({"name": "falafel 5 shekels"}, {$addToSet :{ "reviews" : [new Date(), 5] }});
+
+    // 1.11
+    db.collection('restaurants').updateMany({},{$set: {kosher: true}});
+
+    // 1.12
+    db.collection('restaurants').deleteOne({"name": "thailand paradise"});
+
+    // 1.13
+    db.collection('restaurants').deleteMany({});
+
+    // 1.14
+    db.collection('restaurants').updateOne({ "name": "asian delight" }, { $inc: { "reviews.0.score": 2 } });
+
+    // 1.15
+    db.collection('restaurants').updateOne({ "name": "asian delight" }, { $inc: { "reviews.0.score": -1 } });
+
+    // 2.2
+    db.collection('restaurants').find({}).forEach(restaurant => console.log(restaurant.address.city));
+
+    // 3.1
+    db.collection('restaurants').find({ "name": /^r/ }).toArray((err, res) => {
+        if (err) {
+            return console.log('error');
+        }
+        console.log(res);
+    })
+
+    // 3.2
+    db.collection('restaurants').countDocuments({}, ((err, res) => {
+        if (err) {
+            return console.log('error');
+        }
+        console.log(res);
+    }))
+
+    // 3.3
+    db.collection('restaurants').find({reviews: {$elemMatch : {date: new Date("2020-01-01 00:00:00.000Z") }}}).toArray((err,res)=>{
+        console.log(res);
+    })
 
 })
