@@ -46,9 +46,6 @@ const getAllActiveProducts = (req,res) => {
 const getAllProductsInPriceRange = (req,res) => {
     const minPrice = req.params.min;
     const maxPrice = req.params.max;
-    // Product.find({}).where('details.price').gt(minPrice).lt(maxPrice).exec( x => {
-    //     console.log(x);
-    // })
     Product.find({'details.price': {$gte : minPrice, $lte : maxPrice }}).then(products => {
         if(!products) {
             return res.status(404).send();
