@@ -59,7 +59,51 @@ const getAllProductsInPriceRange = async (req, res) => {
         }
         res.send(products);
     } catch (err) {
-        res.status(501).send(err);
+        res.status(400).send(err);
+    }
+}
+
+const updateProductById = async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ["details.discount", "name", "category", "isActive"];
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
+
+    if (!isValidOperation) {
+        return res.status(400).send({ error: "Invalid updaes" });
+    }
+
+    try {
+        const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        if (!product) {
+            return res.status(404).send();
+        }
+        res.send(product);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+}
+
+const deleteProductById = async (req, res) => {
+    try {
+        const product = await Product.findByIdAndDelete(req.params.id);
+
+        if (!product) {
+            return res.status(404).send();
+        }
+
+        res.send(product)
+    } catch (err) {
+        res.status(500).send(err);
+    }
+
+}
+
+const deleteAllProducts = async (req, res) => {
+    try {
+        await Product.deleteMany();
+        res.status(200).send('All products has been deleted.');
+    } catch (err) {
+        res.status(500).send(err);
     }
 }
 
@@ -69,4 +113,7 @@ module.exports = {
     getProductByName,
     getAllActiveProducts,
     getAllProductsInPriceRange,
+    updateProductById,
+    deleteProductById,
+    deleteAllProducts,
 }
